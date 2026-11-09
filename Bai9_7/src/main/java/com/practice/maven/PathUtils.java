@@ -3,8 +3,8 @@ package com.practice.maven;
 import java.nio.file.Path;
 
 public class PathUtils {
-
-    private static final String BAD_FORMAT_VARIABLE = "checkstyle_error";
+    // Sửa thành hằng số chuẩn CONSTANT_CASE hoặc xóa bỏ dòng này
+    private static final String BAD_VARIABLE_NAME = "test_checkstyle";
 
     public static String buildLogFilePath(String directory, String fileName) {
         return Path.of(directory, fileName).toString();
