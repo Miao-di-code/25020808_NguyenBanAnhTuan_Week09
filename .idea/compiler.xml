@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Bai9_7" />
+        <module name="maven-professional-logging" />
         <module name="maven-ci-automation" />
         <module name="maven-matrix-ci (2)" />
         <module name="bank-system" />

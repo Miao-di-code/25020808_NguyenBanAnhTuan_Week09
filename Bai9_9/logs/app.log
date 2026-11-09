@@ -1,0 +1,18 @@
+2026-11-09 23:48:45.186 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testBuildLogFilePath
+2026-11-09 23:48:45.211 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testGetFileExtension
+2026-11-09 23:48:45.212 [main] WARN  com.practice.maven.PathUtils - Ten file null hoac khong co phan mo rong: noextension
+2026-11-09 23:48:45.214 [main] WARN  com.practice.maven.PathUtils - Ten file null hoac khong co phan mo rong: null
+2026-11-09 23:48:45.218 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testIsAbsolutePath
+2026-11-09 23:48:45.219 [main] WARN  com.practice.maven.PathUtils - Duong dan kiem tra bi null
+2026-11-09 23:53:06.591 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testBuildLogFilePath
+2026-11-09 23:53:06.622 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testGetFileExtension
+2026-11-09 23:53:06.622 [main] WARN  com.practice.maven.PathUtils - Ten file null hoac khong co phan mo rong: noextension
+2026-11-09 23:53:06.626 [main] WARN  com.practice.maven.PathUtils - Ten file null hoac khong co phan mo rong: null
+2026-11-09 23:53:06.630 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testIsAbsolutePath
+2026-11-09 23:53:06.631 [main] WARN  com.practice.maven.PathUtils - Duong dan kiem tra bi null
+2026-11-09 23:56:52.968 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testBuildLogFilePath
+2026-11-09 23:56:53.000 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testGetFileExtension
+2026-11-09 23:56:53.000 [main] WARN  com.practice.maven.PathUtils - Ten file null hoac khong co phan mo rong: noextension
+2026-11-09 23:56:53.003 [main] WARN  com.practice.maven.PathUtils - Ten file null hoac khong co phan mo rong: null
+2026-11-09 23:56:53.008 [main] INFO  com.practice.maven.PathUtilsTest - Bat dau kiem thu testIsAbsolutePath
+2026-11-09 23:56:53.009 [main] WARN  com.practice.maven.PathUtils - Duong dan kiem tra bi null
