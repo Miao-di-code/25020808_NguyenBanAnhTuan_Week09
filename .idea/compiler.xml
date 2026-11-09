@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="bank-system" />
         <module name="maven-ci-automation" />
+        <module name="maven-matrix-ci (1)" />
         <module name="maven-lab-01" />
         <module name="maven-matrix-ci" />
       </profile>
