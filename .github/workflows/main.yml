@@ -11,7 +11,7 @@ jobs:
     name: Build & Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false  # Giữ các OS khác tiếp tục chạy ngay cả khi 1 OS bị lỗi
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
@@ -30,11 +30,11 @@ jobs:
       - name: Build & Test (Bai9_3)
         run: mvn -B clean package --file Bai9_3/pom.xml
 
-      # --- BÀI 4 BUILD ---
-      - name: Build & Test (Bai9_4)
-        run: mvn -B clean package --file Bai9_4/pom.xml
+      # --- BÀI 4 & BÀI 5: BUILD, TEST & JACOCO VERIFY ---
+      - name: Build, Test & Check Coverage (Bai9_4)
+        run: mvn -B clean verify --file Bai9_4/pom.xml
 
-      # --- UPLOAD ARTIFACTS (Chỉ lưu 1 lần đại diện trên môi trường Ubuntu) ---
+      # --- UPLOAD ARTIFACTS ---
       - name: Upload Artifact Bai9_3 (.jar)
         uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest'
@@ -43,10 +43,10 @@ jobs:
           path: Bai9_3/target/*.jar
           retention-days: 5
 
-      - name: Upload Artifact Bai9_4 (.jar)
+      - name: Upload JaCoCo Coverage Report (Bai9_4)
         uses: actions/upload-artifact@v4
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-latest' && always() # always() giúp lưu report kể cả khi build fail
         with:
-          name: bai9-4-artifact
-          path: Bai9_4/target/*.jar
+          name: jacoco-coverage-report
+          path: Bai9_4/target/site/jacoco/
           retention-days: 5
