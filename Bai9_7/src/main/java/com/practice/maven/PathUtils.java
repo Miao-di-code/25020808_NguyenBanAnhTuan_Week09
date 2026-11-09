@@ -4,13 +4,11 @@ import java.nio.file.Path;
 
 public class PathUtils {
 
-    // LỖI CHECKSTYLE CỐ Ý: Sai quy chuẩn đặt tên biến Java
-    static String bad_variable_name = "test_checkstyle";
+    private static final String BAD_FORMAT_VARIABLE = "checkstyle_error";
 
     public static String buildLogFilePath(String directory, String fileName) {
         return Path.of(directory, fileName).toString();
     }
-
 
     // CÁC HÀM CHƯA ĐƯỢC TEST (Làm giảm Code Coverage)
     public static String getFileExtension(String fileName) {
