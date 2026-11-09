@@ -1,32 +1,29 @@
 package com.practice.maven;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.file.Path;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 class PathUtilsTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(PathUtilsTest.class);
-
     @Test
     void testBuildLogFilePathCrossPlatform() {
-        String currentOs = System.getProperty("os.name");
-        logger.info("Running PathUtilsTest on OS: {}", currentOs);
+        String expected = Path.of("logs", "app.log").toString();
+        String actual = PathUtils.buildLogFilePath("logs", "app.log");
+        assertEquals(expected, actual);
+    }
 
-        String dir = "logs";
-        String file = "app.log";
+    @Test
+    void testGetFileExtension() {
+        assertEquals("log", PathUtils.getFileExtension("app.log"));
+        assertEquals("", PathUtils.getFileExtension("noextension"));
+        assertEquals("", PathUtils.getFileExtension(null));
+    }
 
-        // Kết quả kỳ vọng tự thích ứng với separator của OS hiện tại
-        String expected = Path.of(dir, file).toString();
-        String actual = PathUtils.buildLogFilePath(dir, file);
-
-        assertNotNull(actual);
-        assertEquals(expected, actual, "Path separator must match the current operating system");
-
-        logger.info("PathUtilsTest passed on OS: {}", currentOs);
+    @Test
+    void testIsAbsolutePath() {
+        assertFalse(PathUtils.isAbsolutePath("relative/path"));
+        assertFalse(PathUtils.isAbsolutePath(null));
     }
 }
