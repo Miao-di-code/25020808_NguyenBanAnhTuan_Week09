@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [ "main", "master" ]
 
+# --- BÀI 7: Cấp quyền cho GitHub Bot tự động bình luận vào PR ---
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
 jobs:
   build:
     name: Build & Test on ${{ matrix.os }}
@@ -19,7 +25,7 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
-      # BÀI 6: cache: maven tự động lưu/khôi phục thư viện tại ~/.m2 cho toàn bộ các step Maven ở dưới
+      # BÀI 6: Cache Maven dependencies
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -43,7 +49,31 @@ jobs:
       - name: Build, Test & Verify (Bai9_6)
         run: mvn -B clean verify --file Bai9_6/pom.xml
 
-      # --- UPLOAD ARTIFACTS (Chỉ upload 1 lần trên Ubuntu để tránh trùng lặp) ---
+      # --- BÀI 7: AUTOMATED CODE REVIEW & CHECKSTYLE ---
+      - name: Run Checkstyle Inline Review (Bai9_7)
+        uses: dbelyaev/action-checkstyle@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          level: error
+          workdir: Bai9_7
+
+      - name: Build, Test & Verify (Bai9_7)
+        run: mvn -B clean verify --file Bai9_7/pom.xml
+
+      # --- BÀI 8: EXECUTABLE JAR PACKAGING ---
+      - name: Build & Package Executable JAR (Bai9_8)
+        run: mvn -B clean package --file Bai9_8/pom.xml
+
+      - name: Upload Executable JAR Artifact (Bai9_8)
+        uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: bai9-8-executable-jar
+          path: Bai9_8/target/*.jar
+          retention-days: 5
+
+      # --- UPLOAD ARTIFACTS (Chỉ lưu trên Ubuntu để tránh trùng lặp) ---
       - name: Upload Artifact Bai9_3 (.jar)
         uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest'
@@ -66,4 +96,12 @@ jobs:
         with:
           name: bai9-6-jacoco-report
           path: Bai9_6/target/site/jacoco/
+          retention-days: 5
+
+      - name: Upload JaCoCo Coverage Report (Bai9_7)
+        uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest' && always()
+        with:
+          name: bai9-7-jacoco-report
+          path: Bai9_7/target/site/jacoco/
           retention-days: 5
