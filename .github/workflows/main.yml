@@ -61,6 +61,18 @@ jobs:
       - name: Build, Test & Verify (Bai9_7)
         run: mvn -B clean verify --file Bai9_7/pom.xml
 
+      # --- BÀI 8: EXECUTABLE JAR PACKAGING ---
+      - name: Build & Package Executable JAR (Bai9_8)
+        run: mvn -B clean package --file Bai9_8/pom.xml
+
+      - name: Upload Executable JAR Artifact (Bai9_8)
+        uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest'
+        with:
+          name: bai9-8-executable-jar
+          path: Bai9_8/target/*.jar
+          retention-days: 5
+
       # --- UPLOAD ARTIFACTS (Chỉ lưu trên Ubuntu để tránh trùng lặp) ---
       - name: Upload Artifact Bai9_3 (.jar)
         uses: actions/upload-artifact@v4
