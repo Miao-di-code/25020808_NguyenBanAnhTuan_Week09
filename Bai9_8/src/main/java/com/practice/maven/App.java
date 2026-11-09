@@ -1,13 +1,28 @@
 package com.practice.maven;
 
-public class App {
-    public static void main(String[] args) {
+/**
+ * Lop khoi chay chinh cua ung dung Bai 8.
+ */
+public final class App {
+
+    /**
+     * Khoi tao rieng tu cho Main class.
+     */
+    private App() {
+    }
+
+    /**
+     * Diem khoi chay chinh (Main entry point).
+     *
+     * @param args Tham so dong lenh.
+     */
+    public static void main(final String[] args) {
         System.out.println("==============================================");
         System.out.println("   CHƯƠNG TRÌNH ĐÃ KHỞI CHẠY THÀNH CÔNG!     ");
         System.out.println("   Đã chạy từ tệp Executable JAR độc lập.    ");
         System.out.println("==============================================");
 
-        String samplePath = PathUtils.buildLogFilePath("logs", "app.log");
-        System.out.println("Kết quả kiểm tra PathUtils: " + samplePath);
+        final String samplePath = PathUtils.buildLogFilePath("logs", "app.log");
+        System.out.println("Ket qua kiem tra PathUtils: " + samplePath);
     }
 }
