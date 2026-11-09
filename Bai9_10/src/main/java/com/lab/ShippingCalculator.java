@@ -6,9 +6,8 @@ public class ShippingCalculator {
         if (weight <= 0) {
             throw new IllegalArgumentException("Weight must be positive");
         }
-        if (type == null) {
-            throw new IllegalArgumentException("Shipping type cannot be null");
-        }
+
+        
         if ("EXPRESS".equals(type)) {
             return weight * 5000 + 20000;
         }
