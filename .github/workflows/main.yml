@@ -19,22 +19,31 @@ jobs:
       - name: Checkout repository code
         uses: actions/checkout@v4
 
+      # BÀI 6: cache: maven tự động lưu/khôi phục thư viện tại ~/.m2 cho toàn bộ các step Maven ở dưới
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: maven
+          cache: 'maven'
 
       # --- BÀI 3 BUILD ---
       - name: Build & Test (Bai9_3)
         run: mvn -B clean package --file Bai9_3/pom.xml
 
-      # --- BÀI 4 & BÀI 5: BUILD, TEST & JACOCO VERIFY ---
-      - name: Build, Test & Check Coverage (Bai9_4)
-        run: mvn -B clean verify --file Bai9_4/pom.xml
+      # --- BÀI 4 BUILD ---
+      - name: Build & Test (Bai9_4)
+        run: mvn -B clean package --file Bai9_4/pom.xml
 
-      # --- UPLOAD ARTIFACTS ---
+      # --- BÀI 5: BUILD & CHECK COVERAGE ---
+      - name: Build, Test & Check Coverage (Bai9_5)
+        run: mvn -B clean verify --file Bai9_5/pom.xml
+
+      # --- BÀI 6: PIPELINE OPTIMIZATION ---
+      - name: Build, Test & Verify (Bai9_6)
+        run: mvn -B clean verify --file Bai9_6/pom.xml
+
+      # --- UPLOAD ARTIFACTS (Chỉ upload 1 lần trên Ubuntu để tránh trùng lặp) ---
       - name: Upload Artifact Bai9_3 (.jar)
         uses: actions/upload-artifact@v4
         if: matrix.os == 'ubuntu-latest'
@@ -43,10 +52,18 @@ jobs:
           path: Bai9_3/target/*.jar
           retention-days: 5
 
-      - name: Upload JaCoCo Coverage Report (Bai9_4)
+      - name: Upload JaCoCo Coverage Report (Bai9_5)
         uses: actions/upload-artifact@v4
-        if: matrix.os == 'ubuntu-latest' && always() # always() giúp lưu report kể cả khi build fail
+        if: matrix.os == 'ubuntu-latest' && always()
         with:
-          name: jacoco-coverage-report
-          path: Bai9_4/target/site/jacoco/
+          name: bai9-5-jacoco-report
+          path: Bai9_5/target/site/jacoco/
+          retention-days: 5
+
+      - name: Upload JaCoCo Coverage Report (Bai9_6)
+        uses: actions/upload-artifact@v4
+        if: matrix.os == 'ubuntu-latest' && always()
+        with:
+          name: bai9-6-jacoco-report
+          path: Bai9_6/target/site/jacoco/
           retention-days: 5
