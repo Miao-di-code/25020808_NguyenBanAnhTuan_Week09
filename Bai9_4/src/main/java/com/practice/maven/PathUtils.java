@@ -24,6 +24,6 @@ public class PathUtils {
         // =========================================================================
 
         logger.debug("Generated cross-platform path: {}", path);
-        return directory + "\\" + fileName;
+        return path.toString();
     }
 }
