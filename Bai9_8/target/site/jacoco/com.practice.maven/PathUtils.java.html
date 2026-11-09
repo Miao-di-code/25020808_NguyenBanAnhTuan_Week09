@@ -2,28 +2,54 @@
 
 import java.nio.file.Path;
 
-<span class="nc" id="L5">public class PathUtils {</span>
-    // Sửa thành hằng số chuẩn CONSTANT_CASE hoặc xóa bỏ dòng này
-    private static final String BAD_VARIABLE_NAME = &quot;test_checkstyle&quot;;
+/**
+ * Lop tien ich xu ly cac duong dan tep tin.
+ */
+public final class PathUtils {
 
-    public static String buildLogFilePath(String directory, String fileName) {
-<span class="fc" id="L10">        return Path.of(directory, fileName).toString();</span>
+    /**
+     * Khoi tao rieng tu de ngan tao the hien.
+     */
+    private PathUtils() {
     }
 
-    // CÁC HÀM CHƯA ĐƯỢC TEST (Làm giảm Code Coverage)
-    public static String getFileExtension(String fileName) {
-<span class="fc bfc" id="L15" title="All 4 branches covered.">        if (fileName == null || !fileName.contains(&quot;.&quot;)) {</span>
-<span class="fc" id="L16">            return &quot;&quot;;</span>
-        }
-<span class="fc" id="L18">        return fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1);</span>
+    /**
+     * Tao duong dan tep log tu thu muc va ten tep.
+     *
+     * @param directory Thu muc chua tep log.
+     * @param fileName  Ten tep log.
+     * @return Duong dan day du dang chuoi.
+     */
+    public static String buildLogFilePath(
+            final String directory,
+            final String fileName) {
+<span class="fc" id="L26">        return Path.of(directory, fileName).toString();</span>
     }
 
-    public static boolean isAbsolutePath(String path) {
-<span class="fc bfc" id="L22" title="All 2 branches covered.">        if (path == null) {</span>
-<span class="fc" id="L23">            return false;</span>
+    /**
+     * Lay phan mo rong cua tep tin.
+     *
+     * @param fileName Ten tep tin can kiem tra.
+     * @return Phan mo rong hoac chuoi rong neu khong co.
+     */
+    public static String getFileExtension(final String fileName) {
+<span class="fc bfc" id="L36" title="All 4 branches covered.">        if (fileName == null || !fileName.contains(&quot;.&quot;)) {</span>
+<span class="fc" id="L37">            return &quot;&quot;;</span>
         }
-<span class="fc" id="L25">        return Path.of(path).isAbsolute();</span>
+<span class="fc" id="L39">        return fileName.substring(fileName.lastIndexOf(&quot;.&quot;) + 1);</span>
+    }
+
+    /**
+     * Kiem tra xem duong dan co phai duong dan tuyet doi hay khong.
+     *
+     * @param path Chuoi duong dan can kiem tra.
+     * @return true neu la duong dan tuyet doi, nguoc lai tra ve false.
+     */
+    public static boolean isAbsolutePath(final String path) {
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (path == null) {</span>
+<span class="fc" id="L50">            return false;</span>
+        }
+<span class="fc" id="L52">        return Path.of(path).isAbsolute();</span>
     }
 }
-
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
